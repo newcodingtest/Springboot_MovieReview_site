@@ -7,6 +7,7 @@ import org.yoon.moviereview.entity.Member;
 import org.yoon.moviereview.entity.Movie;
 import org.yoon.moviereview.entity.Review;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -37,6 +38,23 @@ public class ReviewRepositoryTests {
 
         });
     }
+
+    @Test
+    public void testGetMovieReviews() {
+        Movie movie = Movie.builder().mno(92L).build();
+
+        List<Review> result = reviewRepository.findByMovie(movie);
+
+        result.forEach(movieReview -> {
+
+            System.out.println(movieReview.getReviewnum());
+            System.out.println("\t"+movieReview.getGrade());
+            System.out.println("\t"+movieReview.getText());
+            System.out.println("\t"+movieReview.getMember().getEmail());
+            System.out.println("=============================");
+        });
+    }
+
 
 
 }
