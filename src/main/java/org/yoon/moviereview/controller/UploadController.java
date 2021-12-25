@@ -49,13 +49,13 @@ public class UploadController {
             String originalName = uploadFile.getOriginalFilename();
             String fileName = originalName.substring(originalName.lastIndexOf("\\")+1);
 
-            log.info("fileName: "+fileName);
+            log.info("업로드 fileName: "+fileName);
 
             String folderPath = makeFolder();
 
             String uuid = UUID.randomUUID().toString();
             //저장할 파일 이름 중간에 _을 이용하여 구분
-            String saveName = uploadPath+File.separator+folderPath+File.separator+uuid+"_"+fileName;
+            String saveName = uploadPath + File.separator + folderPath + File.separator + uuid+"_" + fileName;
 
             Path savePath = Paths.get(saveName);
 
@@ -64,7 +64,7 @@ public class UploadController {
                 uploadFile.transferTo(savePath);
 
                 //썸네일
-                String thumbnailSaveName = uploadPath+File.separator+folderPath+File.separator+"s_"+uuid+"_"+fileName;
+                String thumbnailSaveName = uploadPath + File.separator + folderPath + File.separator + "s_" + uuid+"_" + fileName;
                 //썸네일 파일 이름은 중간에 s로 시작하도록
                 File thumbnailFile = new File(thumbnailSaveName);
                 //썸네일 생성
@@ -74,6 +74,7 @@ public class UploadController {
                 e.printStackTrace();
             }
         }
+        log.info("최종 파일 주소: "+resultDTOList);
         return new ResponseEntity<>(resultDTOList, HttpStatus.OK);
     }
 

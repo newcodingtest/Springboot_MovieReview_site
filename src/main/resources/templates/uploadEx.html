@@ -58,6 +58,21 @@
         });
     });
 
+    $(".uploadResult").on("click", ".removeBtn", function(e){
+
+        var target = $(this);
+        var fileName = target.data("name");
+        var targetDiv = $(this).closest("div");
+
+        console.log(fileName);
+
+        $.post('/removeFile', {fileName: fileName}, function(result){
+           console.log(result);
+           if(result === true){
+               targetDiv.remove();
+           }
+        });
+    });
 
 </script>
 </body>
