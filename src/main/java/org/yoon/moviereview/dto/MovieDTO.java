@@ -1,11 +1,10 @@
 package org.yoon.moviereview.dto;
 
-import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.yoon.moviereview.entity.MovieImage;
+
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
