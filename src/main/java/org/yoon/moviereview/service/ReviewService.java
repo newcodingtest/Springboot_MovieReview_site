@@ -43,7 +43,7 @@ public interface ReviewService {
                                                         .email(movieReview.getMember().getEmail())
                                                                 .grade(movieReview.getGrade())
                                                                         .text(movieReview.getText())
-                                                                                .regdate(movieReview.getRegDate())
+                                                                                .regDate(movieReview.getRegDate())
                                                                                         .modDate(movieReview.getModDate())
                 .build();
         return movieReviewDTO;

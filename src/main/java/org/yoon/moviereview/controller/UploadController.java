@@ -93,7 +93,7 @@ public class UploadController {
     }
 
     @GetMapping("/display")
-    public ResponseEntity<byte[]> getFile(String fileName){
+    public ResponseEntity<byte[]> getFile(String fileName, String size){
 
         ResponseEntity<byte[]> result = null;
 
@@ -102,8 +102,11 @@ public class UploadController {
             log.info("fileName: "+srcFileName);
 
             File file = new File(uploadPath + File.separator + srcFileName);
-            log.info("file: " + file);
 
+            if(size != null && size.equals("1")){
+                file = new File(file.getParent(), file.getName().substring(2));
+            }
+            log.info("file: " + file);
             HttpHeaders header = new HttpHeaders();
             
             //MIME 타입 처리
