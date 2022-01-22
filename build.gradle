@@ -32,8 +32,19 @@ dependencies {
     }
     runtimeOnly 'mysql:mysql-connector-java'
     implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
+// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.1.0.M1'
+
 
     implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.1'
+// https://mvnrepository.com/artifact/org.springframework.security/spring-security-config
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.6.1'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
+    implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.6.1'
+
+
 }
 
 
