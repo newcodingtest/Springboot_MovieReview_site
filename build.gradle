@@ -44,6 +44,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-web
     implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.6.1'
 
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 
 }
 
