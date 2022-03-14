@@ -27,9 +27,11 @@ public class ClubUserDetailsService  implements UserDetailsService {
 
         Optional<ClubMember> result = clubMemberRepository.findByEmail(username,false);
 
-        if(result.isPresent()){
+        if(!result.isPresent()){
             throw new UsernameNotFoundException("check email or social");
         }
+
+        log.info(result.get());
 
         ClubMember clubMember = result.get();
 

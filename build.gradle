@@ -32,8 +32,8 @@ dependencies {
     }
     runtimeOnly 'mysql:mysql-connector-java'
     implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
-// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
-    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.1.0.M1'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
 
 
     implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'

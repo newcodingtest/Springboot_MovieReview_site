@@ -59,6 +59,7 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService {
       return clubAuthMember;
     }
 
+    //소셜로그인 유저정보 저장 방안
     private ClubMember saveSocialMember(String email) {
         
         //기존에 동일한 이메일로 가입한 회원이 있는 경우 그대로 조회만
@@ -67,8 +68,9 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService {
         if(result.isPresent()){
             return result.get();
         }
-
+        //동일한 이메일이 없는경우 일단 임시비밀번호로 해서 db에 소셜로그인 유저정보를 저장한다.
         ClubMember clubMember = ClubMember.builder()
+                .email(email)
                 .name(email)
                 .password(passwordEncoder.encode("1111"))
                 .fromSocial(true)

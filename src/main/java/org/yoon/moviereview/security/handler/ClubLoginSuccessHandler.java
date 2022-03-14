@@ -34,8 +34,9 @@ public class ClubLoginSuccessHandler implements AuthenticationSuccessHandler {
         boolean fromSocial = authMember.isFromSocial();
 
         log.info("Need Modify Member?" + fromSocial);
+        log.info("비밀번호: "+  passwordEncoder.encode(authMember.getPassword()));
 
-        boolean passwordResult = passwordEncoder.matches("1111", authMember.getPassword());
+        boolean passwordResult = passwordEncoder.matches("1111", passwordEncoder.encode(authMember.getPassword()));
 
         //소셜로그인이 있는 사용자가 소셜로그인 정보로 form에 로그인을 시도하게되면 회원정보 수정페이지로 유도한다.
         if(fromSocial && passwordResult){

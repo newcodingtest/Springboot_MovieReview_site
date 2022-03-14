@@ -2,10 +2,7 @@ package org.yoon.moviereview.entity;
 
 import lombok.*;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +14,7 @@ import java.util.Set;
 @ToString
 public class ClubMember extends BaseEntity{
     @Id
+    @Column( name="email", nullable = false)
     private String email;
 
     private String password;

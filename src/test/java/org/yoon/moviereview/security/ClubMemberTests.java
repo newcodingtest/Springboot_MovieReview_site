@@ -1,5 +1,6 @@
 package org.yoon.moviereview.security;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +43,31 @@ public class ClubMemberTests {
             repository.save(clubMember);
         });
     };
+
+    @Test
+    public void insertOneDummies(){
+
+            ClubMember clubMember = ClubMember.builder()
+                    .email("user"+9999+"@yoon.org")
+                    .name("사용자"+9999)
+                    .fromSocial(false)
+                    .password(passwordEncoder.encode("1111"))
+                    .build();
+
+            clubMember.addMemberRole(ClubMemberRole.USER);
+
+            repository.save(clubMember);
+
+    };
+
+    @Test
+    public void 비밀번호인코딩테스트(){
+        String password = "$2a$10$YQI1LNYjwM/0G/dhTSkf0eX.zuDacy5LbIORRhtWO.2NCh1GaURC2";
+
+        Assertions.assertEquals("true",passwordEncoder.matches(password,"1111"));
+
+    }
+
 
     @Test
     public void testRead(){

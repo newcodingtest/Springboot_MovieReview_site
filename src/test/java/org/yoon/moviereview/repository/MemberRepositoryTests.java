@@ -31,6 +31,21 @@ public class MemberRepositoryTests {
         });
     }
 
+    @Test
+    public void insertOneMembers(){
+
+            Member member = Member.builder()
+                    .email("r"+9999+"@yoon.org")
+                    .pw("1111")
+                    .nickname("reviewer"+9999)
+                    .build();
+
+            memberRepository.save(member);
+
+    }
+
+
+
     @Commit
     @Transactional
     @Test
