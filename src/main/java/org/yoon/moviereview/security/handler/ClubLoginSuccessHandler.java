@@ -38,7 +38,7 @@ public class ClubLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         boolean passwordResult = passwordEncoder.matches("1111", passwordEncoder.encode(authMember.getPassword()));
 
-        //소셜로그인이 있는 사용자가 소셜로그인 정보로 form에 로그인을 시도하게되면 회원정보 수정페이지로 유도한다.
+        //소셜로그인이 있는 사용자가 소셜로그인 정보로 form에 로그인을 시도하게되면 회원정보 수정페이지로 유도한다. => 비밀번호 재지정=>소셜로그인 비밀번호 저장시 문제가 될수 있음
         if(fromSocial && passwordResult){
             redirectStrategy.sendRedirect(request, response, "/member/modify?from=social");
         }
