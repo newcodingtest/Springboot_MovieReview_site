@@ -6,6 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.yoon.moviereview.dto.ClubAuthMemberDTO;
+import org.yoon.moviereview.security.util.JWTUtil;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -15,6 +17,14 @@ import java.io.IOException;
 
 @Log4j2
 public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
+
+    private JWTUtil jwtUtil;
+
+
+    public ApiLoginFilter(String defaultFilterProcessesUrl, JWTUtil jwtUtil) {
+        super(defaultFilterProcessesUrl);
+        this.jwtUtil = jwtUtil;
+    }
 
     public ApiLoginFilter(String defaultFilterProcessesUrl) {
         super(defaultFilterProcessesUrl);
@@ -40,5 +50,19 @@ public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
         log.info("successfulAuthentication: " + authResult);
 
         log.info(authResult.getPrincipal());
+
+        String email = ((ClubAuthMemberDTO)authResult.getPrincipal()).getUsername();
+
+        String token = null;
+        try {
+            token = jwtUtil.generateToken(email);
+
+            response.setContentType("text/plain");
+            response.getOutputStream().write(token.getBytes());
+
+            log.info(token);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -17,6 +17,7 @@ import org.yoon.moviereview.security.filter.ApiCheckFilter;
 import org.yoon.moviereview.security.filter.ApiLoginFilter;
 import org.yoon.moviereview.security.handler.ApiLoginFailHandler;
 import org.yoon.moviereview.security.handler.ClubLoginSuccessHandler;
+import org.yoon.moviereview.security.util.JWTUtil;
 import org.yoon.moviereview.service.ClubUserDetailsService;
 
 @Configuration
@@ -60,17 +61,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public ApiCheckFilter apiCheckFilter(){
-        return new ApiCheckFilter("/notes/**/*");
+        return new ApiCheckFilter("/notes/**/*",jwtUtil());
     }
 
     @Bean
     public ApiLoginFilter apiLoginFilter()throws Exception{
-        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login");
+        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login",jwtUtil());
         apiLoginFilter.setAuthenticationManager(authenticationManager());
 
         apiLoginFilter.setAuthenticationFailureHandler(new ApiLoginFailHandler());
 
         return apiLoginFilter;
+    }
+
+    @Bean
+    public JWTUtil jwtUtil(){
+        return new JWTUtil();
     }
 
 }

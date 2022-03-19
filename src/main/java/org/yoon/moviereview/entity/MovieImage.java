@@ -10,9 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @ToString(exclude= "movie")
-public class
-
-MovieImage {
+public class MovieImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
