@@ -12,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.yoon.moviereview.security.filter.ApiCheckFilter;
+import org.yoon.moviereview.security.filter.ApiLoginFilter;
+import org.yoon.moviereview.security.handler.ApiLoginFailHandler;
 import org.yoon.moviereview.security.handler.ClubLoginSuccessHandler;
 import org.yoon.moviereview.service.ClubUserDetailsService;
 
@@ -45,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.rememberMe().tokenValiditySeconds(60*60*27*7)
                 .userDetailsService(userDetailsService);
 
+        http.addFilterBefore(apiCheckFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Bean
@@ -52,5 +58,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new ClubLoginSuccessHandler(passwordEncoder());
     }
 
+    @Bean
+    public ApiCheckFilter apiCheckFilter(){
+        return new ApiCheckFilter("/notes/**/*");
+    }
+
+    @Bean
+    public ApiLoginFilter apiLoginFilter()throws Exception{
+        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login");
+        apiLoginFilter.setAuthenticationManager(authenticationManager());
+
+        apiLoginFilter.setAuthenticationFailureHandler(new ApiLoginFailHandler());
+
+        return apiLoginFilter;
+    }
 
 }
